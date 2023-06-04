@@ -1,5 +1,10 @@
 import qs, { ParsedQs } from "qs";
 
+export function classJoin(...classes: Array<string | null | undefined | false>) {
+  return classes.filter(x => x).join(" ") || undefined;
+}
+
+
 export function qsStringify(obj: any, options?: qs.IStringifyOptions) {
   return qs.stringify(
     obj,

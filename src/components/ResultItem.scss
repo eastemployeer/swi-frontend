@@ -1,8 +1,11 @@
 .ResultItem {
+    flex: 1;
+
     .row {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         gap: 1em;
         padding: 18px;
     }

@@ -68,12 +68,11 @@ export default function SearchInput({ value, onChange, onAdd, onClear, onSearch,
     );
   }
 
-  console.log("VAL: ", value.text);
   return (
     <Paper
       className='SearchInput'
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}>
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', maxWidth: '400px' }}>
       {operatorSelect}
       <Select disableUnderline variant='standard' onChange={onChangeValue} name="field" defaultValue={Field.TEXT}>
         {Object.keys(Field).map(key => <MenuItem key={key} value={Field[key as keyof typeof Field]}>{key}</MenuItem>)}

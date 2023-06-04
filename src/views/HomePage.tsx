@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { TextField, Button, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import './HomePage.scss';
 import { useNavigate } from 'react-router-dom';
 import { qsStringify } from '../helpers/utils';
+import './HomePage.scss';
 
 export default function HomePage() {
   const [term, setTerm] = useState('');

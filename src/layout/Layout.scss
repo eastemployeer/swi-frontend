@@ -1,0 +1,19 @@
+.Layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  > .AppHeader {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    & + div {
+      flex: 1 1 0;
+    }
+  }
+
+  &.compact {
+  
+  }
+}

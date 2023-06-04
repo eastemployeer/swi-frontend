@@ -1,0 +1,21 @@
+.ResultItem {
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
+        padding: 18px;
+    }
+
+    .description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+                line-clamp: 3; 
+        -webkit-box-orient: vertical;
+    }
+
+    img {
+        border-radius: 10px;
+    }
+}

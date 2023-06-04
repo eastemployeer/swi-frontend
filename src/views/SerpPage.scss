@@ -1,0 +1,74 @@
+.SerpPage {
+    padding: 30px 55px;
+    display: flex;
+    flex-direction: row;
+    
+    .logoWrapper {
+        padding-right: 24px;
+
+        .logo {
+            width: 140px;
+            height: auto;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .searchContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .col {
+        flex: 1 0;
+    }
+
+    .label {
+        font-size: 13px;
+        color: #5F6368;
+    }
+
+    .dateModifySlider, .resultsMaxAmountSlider {
+        width: 10em;
+    }
+
+    .filter {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .MuiSlider-valueLabel { 
+        display: none
+    }
+
+    .MuiSlider-thumb:active .MuiSlider-valueLabel,
+    .MuiSlider-thumb:focus .MuiSlider-valueLabel,
+    .MuiSlider-thumb:hover .MuiSlider-valueLabel {
+        display: block
+    }
+
+    .MuiSlider-thumb:active .MuiSlider-valueLabelOpen,
+    .MuiSlider-thumb:focus .MuiSlider-valueLabelOpen,
+    .MuiSlider-thumb:hover .MuiSlider-valueLabelOpen {
+        font-size: 13px;
+        color: #344054;
+        background-color: white;
+        box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+        transform: translateY(130%) scale(1) !important;
+
+        &:before {
+            display: none;
+        }
+      }
+
+    .filterContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+}

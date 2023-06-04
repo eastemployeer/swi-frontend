@@ -26,6 +26,7 @@ export interface SearchTermProps {
 }
 
 export interface WikiResult {
+  RevisionId: number;
   RevisionText: string;
   RevisionTimestamp: number;
   Title: string;
@@ -141,7 +142,7 @@ export default function SerpPage() {
               </Select>
             </div>
           </div>
-          {results.map((result, idx) => <ResultItem key={idx} title={result.Title} description={result.RevisionText} img="/sosna.jpg" />)}
+          {results.map((result, idx) => <ResultItem key={idx} id={result.RevisionId} title={result.Title} description={result.RevisionText} img="/sosna.jpg" />)}
         </div>
         <div className='col'>
 

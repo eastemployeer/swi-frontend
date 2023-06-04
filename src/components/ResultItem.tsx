@@ -3,6 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LaunchIcon from '@mui/icons-material/Launch';
 import React from "react";
 import './ResultItem.scss';
+import { NavLink } from "react-router-dom";
 
 interface ArticleProps {
   title: string;
@@ -10,6 +11,7 @@ interface ArticleProps {
 }
 
 interface ResultItemProps {
+  id: number;
   title: string;
   description: string;
   articles?: ArticleProps[];
@@ -17,7 +19,7 @@ interface ResultItemProps {
   img: string;
 }
 
-export default function ResultItem({ title, description, articles, snippets, img }: ResultItemProps) {
+export default function ResultItem({ title, description, articles, snippets, id, img }: ResultItemProps) {
   let connectedArticles;
   if(articles) {
     connectedArticles = (
@@ -50,7 +52,7 @@ export default function ResultItem({ title, description, articles, snippets, img
     <div className="ResultItem">
       <div className="row">
         <div>
-          <Typography variant="subtitle2">{title}</Typography>
+          <Typography sx={{ textDecoration: 'none' }} variant="subtitle2" component={NavLink} to={`/article/${id}`}>{title}</Typography>
           <Typography variant="caption" className="description">{description}</Typography>
           {snippets && Object.keys(snippets).map((key, idx) => <Typography key={idx} variant="caption">{key}: {snippets[key]}</Typography>)}
         </div>

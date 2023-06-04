@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useCallback, useEffect, useState } from 'react';
 import { TextField, Button, Slider, Typography, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import SearchInput from '../components/SearchInput';
 import './SerpPage.scss';
@@ -92,7 +92,9 @@ export default function SerpPage() {
   return (
     <div className="SerpPage">
       <div className='logoWrapper'>
-        <img src="/logo1.png" alt="Elastic Logo" className="logo" />
+        <NavLink to="/">
+          <img src="/logo1.png" alt="Elastic Logo" className="logo" />
+        </NavLink>
       </div>
       <div className='content'>
         <div className='col'>

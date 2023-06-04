@@ -1,0 +1,28 @@
+.ArticlePage {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: row;
+
+    .col {
+        flex: 1;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .logoWrapper {
+        padding-right: 24px;
+
+        .logo {
+            width: 140px;
+            height: auto;
+        }
+    }
+}

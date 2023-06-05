@@ -1,7 +1,8 @@
 import { Accordion, AccordionDetails, AccordionSummary, Divider, IconButton, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LaunchIcon from '@mui/icons-material/Launch';
-import React from "react";
+import React, { useMemo } from "react";
+import wtf from 'wtf_wikipedia';
 import './ResultItem.scss';
 import { NavLink } from "react-router-dom";
 
@@ -20,6 +21,9 @@ interface ResultItemProps {
 }
 
 export default function ResultItem({ title, description, articles, snippets, id, img }: ResultItemProps) {
+  const parsedDescription = useMemo(() => wtf(description).text(), [description]);
+  // const categories = useMemo(() => wtf(description).json(), [description]);
+  // console.log(categories);
   let connectedArticles;
   if(articles) {
     connectedArticles = (
@@ -53,7 +57,7 @@ export default function ResultItem({ title, description, articles, snippets, id,
       <div className="row">
         <div>
           <Typography sx={{ textDecoration: 'none' }} variant="subtitle2" component={NavLink} to={`/article/${id}`}>{title}</Typography>
-          <Typography variant="caption" className="description">{description}</Typography>
+          <Typography variant="caption" className="description">{parsedDescription}</Typography>
           {snippets && Object.keys(snippets).map((key, idx) => <Typography key={idx} variant="caption">{key}: {snippets[key]}</Typography>)}
         </div>
         <div>

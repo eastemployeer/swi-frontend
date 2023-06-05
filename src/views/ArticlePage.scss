@@ -1,15 +1,41 @@
 .ArticlePage {
-    padding: 30px 40px;
+    background-color: #f8f9fa;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex: 1;
 
-    .col {
+    .mainWrapper {
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 30px 10% 30px 1%;
+        display: flex;
+        flex-direction: row;
+        max-width: 1000px;
         flex: 1;
+    }
+
+    .imgWrapper {
+        padding: 10px;
+    }
+
+    .box {
+        border: 1px solid #A2A9B1;
+    }
+
+    .boxText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #90EE90;
+        font-weight: 600;
+        height: 20px;
     }
 
     .row {
         display: flex;
         flex-direction: row;
+        gap: 5em;
     }
 
     .content {

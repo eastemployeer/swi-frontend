@@ -36,22 +36,29 @@ export default function ArticlePage() {
 
   return (
     <div className="ArticlePage">
-      <div className='logoWrapper'>
-        <NavLink to="/">
-          <img src="/logo1.png" alt="Elastic Logo" className="logo" />
-        </NavLink>
-      </div>
-      <div className="content">
-
-
-        <Typography variant="h4">{article?.Title}</Typography>
-        <Divider sx={{ height: 28, m: 0.5 }} orientation="horizontal" />
-        <div className="row">
-          <div className="col">
-            {article?.RevisionText}
-          </div>
-          <div className="col">
-            <img src="/sosna.jpg" />
+      <div className="mainWrapper">
+        <div className='logoWrapper'>
+          <NavLink to="/">
+            <img src="/logo1.png" alt="Elastic Logo" className="logo" />
+          </NavLink>
+        </div>
+        <div className="content">
+          <Typography variant="h5">{article?.Title}</Typography>
+          <Divider sx={{  mt: 0.5, mb: 2 }} orientation="horizontal" />
+          <div className="row">
+            <div className="col">
+              <div dangerouslySetInnerHTML={{ __html: article?.RevisionText || '' }}></div>
+            </div>
+            <div className="col">
+              <div className="box">
+                <div className="boxText">
+                  {article?.Title}
+                </div>
+                <div className="imgWrapper">
+                  <img src="/sosna.jpg" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function HomePage() {
   }, []);
 
   const onSearch = useCallback(() => {
-    navigate(`/search${qsStringify({ text: term, field: 'RevisionText' })}`);
+    if(term) navigate(`/search${qsStringify({ text: term, field: 'RevisionText' })}`);
   }, [navigate, term]);
   
   return (

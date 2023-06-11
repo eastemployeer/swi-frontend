@@ -15,36 +15,45 @@ interface ResultItemProps {
   id: number;
   title: string;
   description: string;
-  articles?: ArticleProps[];
   snippets?: Record<string, string>;
   img: string;
 }
 
-export default function ResultItem({ title, description, articles, snippets, id, img }: ResultItemProps) {
+interface WikiLink {
+  data: {
+    type: string;
+    site: string;
+    text: string;
+  };
+}
+
+export default function ResultItem({ title, description, snippets, id, img }: ResultItemProps) {
   const parsedDescription = useMemo(() => wtf(description).text(), [description]);
-  // const categories = useMemo(() => wtf(description).json(), [description]);
-  // console.log(categories);
-  let connectedArticles;
-  if(articles) {
-    connectedArticles = (
+  const connectedArticles = useMemo<WikiLink[] | undefined>(() => wtf(description).section('Linki zewnętrzne')?.links() as WikiLink[] | undefined, [description]);
+
+  let content;
+  if(connectedArticles) {
+    content = (
       <div className="articlesContainer">
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Powiązane artykuły</Typography>
+            <Typography className="connectedArticlesHeader">Powiązane artykuły</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {articles.map((article, idx) => (
-              <div className="col" key={idx}>
-                <Typography>
-                  {title}
-                </Typography>
-                <a target="_blank" rel="noopener noreferrer" href={article.url}>
-                  <IconButton type="button" sx={{ p: '10px' }}>
-                    <LaunchIcon />
-                  </IconButton>
-                </a>
-                <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-              </div>
+            {[...new Set(connectedArticles)].filter(article => article.data.type === 'external').map((article, idx) => (
+              <>
+                <div className="connectedArticleItem" key={idx}>
+                  <Typography>
+                    {article.data.text}
+                  </Typography>
+                  <a target="_blank" rel="noopener noreferrer" href={article.data.site}>
+                    <IconButton type="button" sx={{ p: '10px' }}>
+                      <LaunchIcon />
+                    </IconButton>
+                  </a>
+                </div>
+                <Divider sx={{ m: 1 }} orientation="horizontal" />
+              </>
             ))}
           </AccordionDetails>
         </Accordion>
@@ -64,7 +73,7 @@ export default function ResultItem({ title, description, articles, snippets, id,
           <img src={img} />
         </div>
       </div>
-      {connectedArticles}
+      {content}
     </div>
   );
 }

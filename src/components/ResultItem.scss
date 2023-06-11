@@ -10,6 +10,16 @@
         padding: 18px;
     }
 
+    .connectedArticleItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .connectedArticlesHeader {
+        font-weight: 600;
+    }
+
     .description {
         overflow: hidden;
         display: -webkit-box;

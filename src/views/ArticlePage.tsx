@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Divider, Typography } from "@mui/material";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import wtf from 'wtf_wikipedia';
+import wtfPluginHtml from 'wtf-plugin-html';
+import wtfPluginImage from 'wtf-plugin-image';
 import axios from 'axios';
 import { useParams } from "react-router";
 import './ArticlePage.scss';
 import { NavLink } from "react-router-dom";
+
+wtf.extend(wtfPluginHtml);
 
 interface Article {
   RevisionId: number;
@@ -13,10 +18,34 @@ interface Article {
   img: string;
 }
 
+const parser = new DOMParser();
+
 export default function ArticlePage() {
-  const [article, setArticle] = useState<Article | null>(null);
   const { id } = useParams();
-  console.log(id);
+  const [article, setArticle] = useState<Article | null>(null);
+  const [content, infobox] = useMemo(() => {
+    let htmlString = (wtf(article?.RevisionText || '') as any).html();
+    htmlString = htmlString.replaceAll(/href="\.\//g, 'href="/search?0%5Bfield%5D=Title&0%5Btext%5D=');
+    htmlString = htmlString.replaceAll('Plik%3A', '');
+    const doc = parser.parseFromString(htmlString, 'text/html');
+
+    //PROCCESS INFOBOX
+    const box = doc.querySelector('.infobox');
+    if(box) box.remove();
+
+    return [doc.documentElement.innerHTML, box?.outerHTML];
+  }, [article]);
+
+  const img = useMemo(() => {
+    let img;
+    const infoboxImg = wtf(article?.RevisionText || '').infobox()?.image()?.url().replaceAll('Plik%3A', '');
+    const generalImg = wtf(article?.RevisionText || '').image()?.url().replaceAll('Plik%3A', '');
+    if(infoboxImg) img = infoboxImg + '?width=300';
+    else if(generalImg) img = generalImg + '?width=300';
+    else img = "/sosna.jpg";
+
+    return img;
+  }, [article]);
 
   const fetch = useCallback(async () => {
     const response = await axios({
@@ -47,7 +76,7 @@ export default function ArticlePage() {
           <Divider sx={{  mt: 0.5, mb: 2 }} orientation="horizontal" />
           <div className="row">
             <div className="col">
-              <div dangerouslySetInnerHTML={{ __html: article?.RevisionText || '' }}></div>
+              <div dangerouslySetInnerHTML={{ __html: content }}></div>
             </div>
             <div className="col">
               <div className="box">
@@ -55,7 +84,8 @@ export default function ArticlePage() {
                   {article?.Title}
                 </div>
                 <div className="imgWrapper">
-                  <img src="/sosna.jpg" />
+                  <img src={img || "/sosna.jpg"} />
+                  <div dangerouslySetInnerHTML={{ __html: infobox || "" }}></div>
                 </div>
               </div>
             </div>

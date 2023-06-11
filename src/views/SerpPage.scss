@@ -12,9 +12,40 @@
         }
     }
 
+    .imgWrapper {
+        padding: 10px;
+        font-size: 14px;
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .box {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 150px;
+        border: 1px solid #A2A9B1;
+        max-width: 400px;
+        min-width: min-content;
+        border-radius: 8px;
+    }
+
+    .boxText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #90EE90;
+        font-weight: 600;
+        height: 20px;
+    }
+
     .content {
         display: flex;
         flex-direction: row;
+        max-width: 1300px;
     }
 
     .searchContainer {
@@ -24,8 +55,6 @@
     }
 
     .col {
-        display: flex;
-        flex-direction: column;
         flex: 1;
     }
 
@@ -35,7 +64,7 @@
     }
 
     .dateModifySlider, .resultsMaxAmountSlider {
-        width: 10em;
+        width: 9em;
     }
 
     .filter {

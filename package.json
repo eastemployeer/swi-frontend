@@ -25,7 +25,9 @@
     "sass": "^1.62.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
-    "wtf_wikipedia": "^10.1.5"
+    "wtf_wikipedia": "^10.1.5",
+    "wtf-plugin-html": "^1.0.0",
+    "wtf-plugin-image": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

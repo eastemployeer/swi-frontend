@@ -41,7 +41,7 @@ export default function SearchInput({ value, onChange, onAdd, onClear, onSearch,
   } else {
     operatorSelect = (
       <>
-        <Select disableUnderline variant='standard' onChange={onChangeValue} name='operator'>
+        <Select disableUnderline variant='standard' onChange={onChangeValue} name='operator' value={value.operator}>
           {Object.keys(Operator).map(key => <MenuItem key={key} value={Operator[key as keyof typeof Operator]}>{key}</MenuItem>)}
         </Select>
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
@@ -60,7 +60,7 @@ export default function SearchInput({ value, onChange, onAdd, onClear, onSearch,
     );
   }
 
-  if(value.text) {
+  if(value.text || index !== 0) {
     clearIconBtn = (
       <IconButton sx={{ p: '10px' }} aria-label="clear" onClick={onDelete}>
         <ClearIcon />
@@ -74,7 +74,7 @@ export default function SearchInput({ value, onChange, onAdd, onClear, onSearch,
       component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', maxWidth: '400px' }}>
       {operatorSelect}
-      <Select disableUnderline variant='standard' onChange={onChangeValue} name="field" defaultValue={Field.TEXT}>
+      <Select disableUnderline variant='standard' onChange={onChangeValue} name="field" value={value.field}>
         {Object.keys(Field).map(key => <MenuItem key={key} value={Field[key as keyof typeof Field]}>{key}</MenuItem>)}
       </Select>
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import https from 'https';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TextField, Button, Slider, Typography, Select, MenuItem, FormControl, InputLabel, Divider } from '@mui/material';
 import { NavLink, useSearchParams } from 'react-router-dom';
@@ -61,35 +62,13 @@ export default function SerpPage() {
     return [content, wtf(docWithInfobox?.RevisionText || '').infobox()];
   }, [results]);
 
-
-  // const [infoBoxData, setInfoBoxData] = useState<string | null>(null);
-  // const infoBoxSearchTerm = useMemo(() => {
-  //   if(!paramsRef.current) return '';
-
-  //   if(paramsRef.current.text) {
-  //     return paramsRef.current.text;
-  //   } else {
-  //     return (Object.values(paramsRef.current) as unknown as SearchTermProps[]).reduce((acc, curr) => acc + ' ' + curr.text, '');
-  //   }
-  // }, []);
-
-  // const fetchInfoBoxData = useCallback(async () => {
-  //   console.log(infoBoxSearchTerm);
-  //   const results = await wtf.fetch(infoBoxSearchTerm);
-  //   console.log(results);
-  //   if(!results) return;
-
-  //   const content = 'hyhy';
-  //   // if(Array.isArray(results)) content = (results[0].infobox() as any).html();
-  //   // else content = (results.infobox() as any).html();
-
-  //   setInfoBoxData(content);
-  // }, [infoBoxSearchTerm]);
-
   const fetch = useCallback(async () => {
     const response = await axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_SERVER_URL}/results`,
+      url: `${process.env.REACT_APP_SERVER_URL}/Search${window.location.search}`,
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
     });
 
     setResults(response.data);

@@ -14,7 +14,19 @@ export default function HomePage() {
   }, []);
 
   const onSearch = useCallback(() => {
-    if(term) navigate(`/search${qsStringify({ text: term, field: 'RevisionText' })}`);
+    if(term) navigate(`/search${qsStringify({
+      0: {
+        text: term,
+        field: 'RevisionText',
+      },
+      toArticleLength: 500000,
+      fromArticleLength: 1,
+      dateFrom: '1970-01-01',
+      dateTo: '2023-06-16',
+      sortBy: 'revisiontimestamp',
+      page: 1,
+      limit: 20,
+    })}`);
   }, [navigate, term]);
   
   return (

@@ -23,9 +23,9 @@ export default function HomePage() {
       fromArticleLength: 1,
       dateFrom: '1970-01-01',
       dateTo: '2023-06-16',
-      sortBy: 'revisiontimestamp',
+      sortBy: 'rank',
       page: 1,
-      limit: 20,
+      limit: 10,
     })}`);
   }, [navigate, term]);
   

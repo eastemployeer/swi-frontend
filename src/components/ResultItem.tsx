@@ -16,7 +16,6 @@ interface ResultItemProps {
   title: string;
   description: string;
   snippets?: Record<string, string>;
-  img: string;
 }
 
 interface WikiLink {
@@ -27,12 +26,22 @@ interface WikiLink {
   };
 }
 
-export default function ResultItem({ title, description, snippets, id, img }: ResultItemProps) {
+export default function ResultItem({ title, description, snippets, id }: ResultItemProps) {
+  const img = useMemo(() => {
+    let img;
+    const infoboxImg = wtf(description || '').infobox()?.image()?.url().replaceAll('Plik%3A', '');
+    const generalImg = wtf(description || '').image()?.url().replaceAll('Plik%3A', '');
+    if(infoboxImg) img = infoboxImg + '?width=100&height=100';
+    else if(generalImg) img = generalImg + '?width=100&height=100';
+    else img = null;
+
+    return img;
+  }, [description]);
   const parsedDescription = useMemo(() => wtf(description).text(), [description]);
   const connectedArticles = useMemo<WikiLink[] | undefined>(() => wtf(description).section('Linki zewnętrzne')?.links() as WikiLink[] | undefined, [description]);
-
+  console.log(connectedArticles);
   let content;
-  if(connectedArticles) {
+  if(connectedArticles?.length) {
     content = (
       <div className="articlesContainer">
         <Accordion>
@@ -70,7 +79,7 @@ export default function ResultItem({ title, description, snippets, id, img }: Re
           {snippets && Object.keys(snippets).map((key, idx) => <Typography key={idx} variant="caption">{key}: {snippets[key]}</Typography>)}
         </div>
         <div>
-          <img src={img} />
+          {img && <img src={img} />}
         </div>
       </div>
       {content}

@@ -15,6 +15,13 @@
         flex: 1;
     }
 
+    .languageBox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
+    }
+
     .imgWrapper {
         padding: 10px;
         font-size: 14px;
@@ -40,10 +47,20 @@
         height: 20px;
     }
 
+    .heading {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     .row {
         display: flex;
         flex-direction: row;
         gap: 5em;
+    }
+
+    .contentCol {
+        max-width: 600px;
     }
 
     .content {
